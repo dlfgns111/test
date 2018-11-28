@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE  tiles-definitions PUBLIC 
+    "-//Aapche Software Foundation//DTD Tiles Configuration 2.0//EN" 
+    "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	
+	<definition name="/gallery/updateProc" extends="main">
+		<put-attribute name="title"
+			value="gallery 암호수정확인"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/updatePasswdProc.jsp" />
+	</definition>
+	
+	<definition name="/gallery/updatePasswd" extends="main">
+		<put-attribute name="title"
+			value="gallery 암호수정"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/updatePasswdForm.jsp" />
+	</definition>
+	
+	<definition name="/gallery/delete" extends="main">
+		<put-attribute name="title"
+			value="gallery 이미지 삭제"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/deleteForm.jsp" />
+	</definition>
+	
+	<definition name="/gallery/update" extends="main">
+		<put-attribute name="title"
+			value="gallery 이미지 수정"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/updateForm.jsp" />
+	</definition>
+	
+	<definition name="/gallery/read" extends="main">
+		<put-attribute name="title"
+			value="gallery 이미지 조회"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/read.jsp" />
+	</definition>
+	
+	<definition name="/gallery/list" extends="main">
+		<put-attribute name="title"
+			value="gallery 이미지 목록"></put-attribute>
+		<put-attribute name="body"
+			value="/WEB-INF/views/gallery/list.jsp" />
+	</definition>
+	
+	<definition name="/gallery/create" extends="main">
+		<put-attribute name="title"
+			value="gallery 이미지 생성"></put-attribute>
+		<put-attribute  name="body"
+			value="/WEB-INF/views/gallery/createForm.jsp" />
+	</definition>
+
+</tiles-definitions> 
