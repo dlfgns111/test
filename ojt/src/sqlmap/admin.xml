@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="admin">
+	
+	<insert id="create" parameterType="AdminDTO">
+		insert into admin(a_ID, passwd)
+		values(#{a_ID},#{passwd})
+	</insert>
+	
+	<select id="read" parameterType="String" resultType="AdminDTO">
+		select * from admin where a_ID = #{a_ID}
+	</select>
+	
+	<select id="list" parameterType="Map" resultType="AdminDTO">
+		select a_ID, passwd, r
+		from(
+			select a_ID, passwd, rownum as r
+			from(
+				select a_ID, passwd
+				from admin
+				order by a_ID desc
+				)
+		<![CDATA[                                     
+	)where r>= #{sno} and r<= #{eno}                     
+    ]]>
+	</select>
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from admin
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		delete from admin where a_ID = #{a_ID}
+	</delete>	
+	
+</mapper>
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="declaration">
+
+	<insert id="create" parameterType="DeclarationDTO">
+	insert into declaration(d_num, d_title, d_content <if test="u_ID != null">,u_ID</if><if test="c_ID != null">, c_ID</if>)
+	values((SELECT NVL(MAX(d_num), 0)+1 FROM declaration), #{d_title}, #{d_content}<if test="u_ID != null">, #{u_ID}</if><if test="c_ID != null">, #{c_ID}</if>)
+	</insert>
+	
+	<select id="read" parameterType="int" resultType="DeclarationDTO">
+	select * from declaration where d_num = #{d_num}
+	</select>
+	
+	<update id="update" parameterType="DeclarationDTO">
+	update declaration set
+		d_title = #{d_title},
+		d_content = #{d_content}
+		<if test="a_ID != null">, 
+			a_ID = #{a_ID}
+		</if>
+		
+		where d_num = #{d_num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	delete from declaration where d_num =#{d_num}
+	</delete>
+	
+	<select id="list" parameterType="Map" resultType="DeclarationDTO">
+		select d_num, d_title, d_content, d_viewcnt, d_date, r
+		from
+			select d_num, d_title, d_content, d_viewcnt, d_date, as r
+			from
+				select d_num, d_title, d_content, d_viewcnt, to_char(d_date, yyyy-mm-dd) as d_date
+					 from declaration
+				order by d_num desc
+		<![CDATA[                                     
+	)where r>= #{sno} and r<= #{eno}                     
+    ]]>
+	</select>
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from declaration
+	</select>
+	
+</mapper>

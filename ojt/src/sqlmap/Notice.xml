@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Notice">
+
+	<insert id="create" parameterType="NoticeDTO">
+	insert into Notice(N_num, N_title, N_content <if test="u_ID != null">,u_ID</if><if test="c_ID != null">, c_ID</if>)
+	values((SELECT NVL(MAX(d_num), 0)+1 FROM Notice), #{d_title}, #{d_content}<if test="u_ID != null">, #{u_ID}</if><if test="c_ID != null">, #{c_ID}</if>)
+	</insert>
+	
+	<select id="read" parameterType="int" resultType="NoticeDTO">
+	select * from notice where n_num = #{n_num}
+	</select>
+	
+	<update id="update" parameterType="NoticeDTO">
+		update notice set
+			n_content = #{n_content}
+			n_writer = #{n_writer}
+			where n_num = #{n_num}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+	delete from Notice where n_num = #{n_num}
+	</delete>
+	
+	<select id="list" parameterType="Map" resultType="NoticeDTO">
+			select n_num, n_title, n_content, nc_date, r
+				from
+					select n_num, n_title, n_content, n_date, as r
+					from
+						select n_num, n_title, n_content, to_char(n_date, yyyy-mm-dd) as n_date
+							 from notice
+						order by n_num desc
+		<![CDATA[                                     
+	)where r>= #{sno} and r<= #{eno}                     
+    ]]>
+	</select>
+	
+	<select id="total" parameterType="Map" resultType="int">
+		select count(*) from Notice
+	</select>
+	
+</mapper>
