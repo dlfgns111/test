@@ -24,7 +24,7 @@ color: red;
 <div class="wrap">
 	<div class="head">
 	<b><h1>pinchHitters<h1></h1></b>
-	<b><h3>신고게시판<h1></h3></b>
+	<b><h3>공지사항<h1></h3></b>
 	</div>
 	
 	<div class="navmenu">
@@ -33,25 +33,15 @@ color: red;
 	</div>
 	
 	<div class="main" align="center">
-		<% if(dto.getA_ID() != null){%>
-			<input type="button" value="관리자답변완료" class="active">
-		<%} %>
-		<% if(dto.getU_ID() != null){%>
-			<input type="button" value="개인" class="active">
-		<%} %>
-		<% if(dto.getC_ID() != null){%>
-			<input type="button" value="업체" class="active">
-		<%} %>
 		
 		<br><br>
 		
 		<textarea rows="50" cols="50">
-		신고내용
+		공지사항 내용을 입력해주세요.
 		</textarea>
 		
 		<br><br>
-		<input type="button" value="수정">
-		<input type="button" value="삭제">
+		<input type="button" value="공지사항등록">
 	</div>
 </div>
 </body>

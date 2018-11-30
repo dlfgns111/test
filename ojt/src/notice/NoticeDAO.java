@@ -22,9 +22,9 @@ public class NoticeDAO {
 		return flag;		
 	}
 
-	public NoticeDTO read(int d_num) {
+	public NoticeDTO read(int n_num) {
 		
-		return session.selectOne("notice.read",d_num);
+		return session.selectOne("notice.read",n_num);
 	}
 	
 	public List<NoticeDTO> list(Map map) {
@@ -37,9 +37,9 @@ public class NoticeDAO {
 		return session.selectOne("notice.total",map);
 	}
 	
-	public boolean delete(int d_num) {
+	public boolean delete(int n_num) {
 		boolean flag = false;
-			int cnt = session.delete("notice.delete",d_num);
+			int cnt = session.delete("notice.delete",n_num);
 			if(cnt>0) flag=true;
 			
 		return flag;

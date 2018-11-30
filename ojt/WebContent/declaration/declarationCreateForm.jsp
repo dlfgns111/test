@@ -27,15 +27,12 @@ color: red;
 	<b><h3>신고게시판<h1></h3></b>
 	</div>
 	
-	<div class="navmenu">
-		<input type="button" value="공지사항">
-		<input type="button" value="신고게시판">
+	<div class="navbar">
+		<input type="button" value="공지사항" onclick="location.href='./noticeCreateForm.jsp'">
+		<input type="button" value="신고게시판" onclick="location.href='./declarationCreateForm.jsp'">
 	</div>
 	
 	<div class="main" align="center">
-		<% if(dto.getA_ID() != null){%>
-			<input type="button" value="관리자답변완료" class="active">
-		<%} %>
 		<% if(dto.getU_ID() != null){%>
 			<input type="button" value="개인" class="active">
 		<%} %>
@@ -46,12 +43,11 @@ color: red;
 		<br><br>
 		
 		<textarea rows="50" cols="50">
-		신고내용
+		신고내용을 입력해주세요.
 		</textarea>
 		
 		<br><br>
-		<input type="button" value="수정">
-		<input type="button" value="삭제">
+		<input type="button" value="신고등록" onclick="location.href='./declarationCreateProc.jsp'">
 	</div>
 </div>
 </body>

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import n_comment.N_CommentDAO;
 import n_comment.N_CommentDTO;
+import notice.NoticeDTO;
 
 public class N_CommentTest {
 	public static void main(String[] args) {
@@ -14,13 +15,13 @@ public class N_CommentTest {
 
 		
 
-		 create(dao);
+		// create(dao);
 		// read(dao);
 		// update(dao);
 		// delete(dao);
 		// bdelete(dao);
 		// list(dao);
-		// total(dao);
+		 total(dao);
 
 	}
 
@@ -35,27 +36,23 @@ public class N_CommentTest {
 	}
 
 	private static void list(N_CommentDAO dao) {
-
+		
+		int sno = 1;
+		int eno = 5;
+		
 		Map map = new HashMap();
 
-		map.put("N_num", 2);
+		map.put("n_num", 2);
 		map.put("sno", 1);
 		map.put("eno", 5);
 
 		List<N_CommentDTO> list = dao.list(map);
 
-		Iterator<N_CommentDTO> iter = list.iterator();
-
-		while (iter.hasNext()) {
-			N_CommentDTO dto = iter.next();
-			p(dto);
-			p("----------------------");
-		}
-
 		for (int i = 0; i < list.size(); i++) {
 			N_CommentDTO dto = list.get(i);
 
 			p(dto);
+			System.out.println("-------------------");
 		}
 	}
 
@@ -91,7 +88,7 @@ public class N_CommentTest {
 		N_CommentDTO dto = new N_CommentDTO();
 
 		dto.setNc_content("댓글 업데이트 테스트");		
-		dto.setN_num(1);
+		dto.setNc_num(1);
 
 		if (dao.update(dto)) {
 			p("UPDATE 성공");

@@ -14,9 +14,22 @@ public class NoticeTest {
 		
 		//create(dao);
 		//read(dao);
-		//update(dao);
+		//udate(dao);
 		//delete(dao);
 		//list(dao);
+		total(dao);
+		
+	}
+
+
+
+
+	private static void total(NoticeDAO dao) {
+		Map map = new HashMap();
+		
+		int total = dao.total(map);
+		
+		p("레코드 개수"+total);
 		
 	}
 
@@ -25,8 +38,10 @@ public class NoticeTest {
 
 	private static void list(NoticeDAO dao) {
 		Map map = new HashMap();
-		List<NoticeDTO> list = dao.list(map);
+		map.put("sno", 1);
+		map.put("eno", 5);
 		
+		List<NoticeDTO> list = dao.list(map);
 		Iterator<NoticeDTO> iter = list.iterator();
 		
 		while(iter.hasNext()) {
@@ -40,8 +55,8 @@ public class NoticeTest {
 
 
 	private static void delete(NoticeDAO dao) {
-		int d_num = 1;
-		if(dao.delete(d_num)) {
+		int n_num = 1;
+		if(dao.delete(n_num)) {
 			p("delete성공");
 		}else {
 			p("delete실패");
@@ -53,10 +68,9 @@ public class NoticeTest {
 
 	private static void update(NoticeDAO dao) {
 		NoticeDTO dto = new NoticeDTO();
-		dto = dao.read(2);
-		dto.setN_title("관리자답변");
-		dto.setN_content("관리자답변");	
-		dto.setA_ID("admin");		
+		dto = dao.read(1);
+		dto.setN_title("공지사항업데이트");
+		dto.setN_content("공지사항업데이트");			
 		if(dao.update(dto)) {
 			p("update성공");
 		}else {

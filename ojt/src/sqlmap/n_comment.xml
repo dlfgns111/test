@@ -7,13 +7,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="n_comment">
 
 	<insert id="create" parameterType="N_CommentDTO">
-		<selectKey keyProperty="nc_num" resultType="int"
-			order="BEFORE">
+		<selectKey keyProperty="nc_num" resultType="int" order="BEFORE">
 			select nvl(max(nc_num),0)+1 from N_Comment
 		</selectKey>
-		insert into N_Comment(nc_num, content, regdate, id, bbsno)
-		values(#{nc_num},
-		#{content}, sysdate, #{id}, #{bbsno})
+		insert into N_Comment(nc_num, nc_content, nc_writer, nc_date,  n_num)
+		values(#{nc_num}, #{nc_content}, #{nc_writer}, sysdate,  #{n_num})
 	</insert>
 
 	<select id="read" parameterType="int" resultType="N_CommentDTO">
@@ -24,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="update" parameterType="N_CommentDTO">
 		update N_Comment
-		set content = #{content}
+		set nc_content = #{nc_content}
 		where nc_num = #{nc_num}
 	</update>
 
@@ -37,19 +35,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="bdelete" parameterType="int">
 		delete from N_Comment
 		where
-		bbsno = #{bbsno}
+		nc_num = #{nc_num}
 	</delete>
 
 	<select id="list" parameterType="Map" resultType="N_CommentDTO">
-		select nc_num,
-		content, to_char(regdate,'yyyy-mm-dd') regdate, id, bbsno,
-		r
+		select nc_num, nc_content, nc_writer, nc_date,  n_num, r
 			FROM(
-			select nc_num, content, regdate, id, bbsno, rownum r
+			select nc_num, nc_content, nc_writer, nc_date, n_num, rownum r
 				FROM(
-				select nc_num, content, regdate, id, bbsno
+				select nc_num, nc_content, nc_writer, n_num, to_char(nc_date, 'yyyy-mm-dd') as nc_date
 				from N_Comment
-				where bbsno = #{bbsno}
+				
 				order by nc_num DESC
 				)
 				<![CDATA[
@@ -59,7 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="total" parameterType="int" resultType="int">
 		select count(*) from N_Comment 
-			where bbsno = #{bbsno}
+			where n_num = #{n_num}
 	</select>
 	
 </mapper>

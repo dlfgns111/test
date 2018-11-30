@@ -31,12 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="list" parameterType="Map" resultType="DeclarationDTO">
 		select d_num, d_title, d_content, d_viewcnt, d_date, r
-		from
-			select d_num, d_title, d_content, d_viewcnt, d_date, as r
-			from
-				select d_num, d_title, d_content, d_viewcnt, to_char(d_date, yyyy-mm-dd) as d_date
+		from(
+			select d_num, d_title, d_content, d_viewcnt, d_date, rownum as r
+			from(
+				select d_num, d_title, d_content, d_viewcnt, to_char(d_date, 'yyyy-mm-dd') as d_date
 					 from declaration
 				order by d_num desc
+				)
 		<![CDATA[                                     
 	)where r>= #{sno} and r<= #{eno}                     
     ]]>

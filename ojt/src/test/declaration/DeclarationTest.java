@@ -17,6 +17,19 @@ public class DeclarationTest {
 		//update(dao);
 		//delete(dao);
 		//list(dao);
+		//total(dao);
+		
+	}
+
+
+
+
+	private static void total(DeclarationDAO dao) {
+		Map map = new HashMap();
+		
+		int total = dao.total(map);
+		
+		p("레코드 개수"+total);
 		
 	}
 
@@ -25,6 +38,8 @@ public class DeclarationTest {
 
 	private static void list(DeclarationDAO dao) {
 		Map map = new HashMap();
+		map.put("sno", 1);
+		map.put("eno", 5);
 		List<DeclarationDTO> list = dao.list(map);
 		
 		Iterator<DeclarationDTO> iter = list.iterator();
